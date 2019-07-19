@@ -1,11 +1,11 @@
 #include "darknet.h"
 
-char *voc_names[] = {"aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"};
+char *voc_names[] = {"js"};
 
 void train_yolo(char *cfgfile, char *weightfile)
 {
-    char *train_images = "/data/voc/train.txt";
-    char *backup_directory = "/home/pjreddie/backup/";
+    char *train_images = "./data/js/js.txt";
+    char *backup_directory = "/home/superbin/work/yolo";
     srand(time(0));
     char *base = basecfg(cfgfile);
     printf("%s\n", base);
@@ -46,8 +46,8 @@ void train_yolo(char *cfgfile, char *weightfile)
 
     pthread_t load_thread = load_data_in_thread(args);
     clock_t time;
-    //while(i*imgs < N*120){
-    while(get_current_batch(net) < net->max_batches){
+    while(i*imgs < 2*120){
+    //while(get_current_batch(net) < net->max_batches){
         i += 1;
         time=clock();
         pthread_join(load_thread, 0);
